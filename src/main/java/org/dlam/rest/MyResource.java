@@ -1,12 +1,13 @@
 package org.dlam.rest;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import com.sun.research.ws.wadl.Response;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.dlam.User;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,6 +86,33 @@ public class MyResource {
                 "<link rel=\"stylesheet\" href=\"http://localhost:8080/files/css/styles.css\">" +
                 "</body></html>";
 
+    }
+
+    @Path("/csvupload")
+    @POST
+    @Consumes({MediaType.MULTIPART_FORM_DATA})
+    public jakarta.ws.rs.core.Response  csvupload( @FormDataParam("file") InputStream fileInputStream,
+                                                            @FormDataParam("file") FormDataContentDisposition fileMetaData) throws Exception
+
+    {
+        String UPLOAD_PATH = "c:/temp/";
+        try
+        {
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + fileMetaData.getFileName()));
+            while ((read = fileInputStream.read(bytes)) != -1)
+            {
+                out.write(bytes, 0, read);
+            }
+            out.flush();
+            out.close();
+        } catch (IOException e)
+        {
+            throw new WebApplicationException("Error while uploading file. Please try again !!");
+        }
+        return jakarta.ws.rs.core.Response.ok("Data uploaded successfully !!").build();
     }
 
 

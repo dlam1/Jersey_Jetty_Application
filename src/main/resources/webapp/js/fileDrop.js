@@ -41,7 +41,7 @@ function handleFiles(files) {
 }
 
 function uploadFile(file) {
-  let url = 'YOUR URL HERE'
+  let url = 'http://localhost:8080/rest/csvupload'
   let formData = new FormData()
 
   formData.append('file', file)
@@ -50,6 +50,7 @@ function uploadFile(file) {
     method: 'POST',
     body: formData
   })
-  .then(() => { /* Done. Inform the user */ })
-  .catch(() => { /* Error. Inform the user */ })
+  .then(() => {   })
+ // .then((result) => {console.log('Success:', result);})
+  .catch(() => {  })
 }

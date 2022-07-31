@@ -6,6 +6,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.glassfish.jersey.servlet.ServletContainer;
@@ -21,6 +22,7 @@ public class JettyServer {
         context.setContextPath("/rest");
         // scan packages
         final ResourceConfig config = new ResourceConfig(MyResource.class);
+        config.register(MultiPartFeature.class);  //allow post of media type of form data multi part
         ServletHolder holder = new ServletHolder(new ServletContainer(config));
         context.addServlet(holder, "/*");
 

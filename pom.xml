@@ -55,6 +55,13 @@
             <version>5.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>3.0.4</version> <!-- Make sure the Jersey version matches
+                                 the one you are currently using -->
+        </dependency>
+
     </dependencies>
 
 
