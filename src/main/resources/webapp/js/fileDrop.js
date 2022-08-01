@@ -41,7 +41,7 @@ function handleFiles(files) {
 }
 
 function uploadFile(file) {
-  let url = 'http://localhost:8080/rest/csvupload'
+  let url = '../../rest/csvupload'   //fileDrop.html is at files/html
   let formData = new FormData()
 
   formData.append('file', file)
